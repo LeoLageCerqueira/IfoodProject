@@ -16,6 +16,7 @@ class Pedido(models.Model):
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     cliente = models.OneToOneField('Cliente', on_delete=models.CASCADE)
     pratos = models.ManyToManyField(Prato)
+    entregador = models.ForeignKey('Entregador', on_delete=models.SET_NULL, blank=True, null=True)
     d_entra = models.DateTimeField(auto_now_add=True)
     d_saida = models.DateTimeField(blank=True, null=True)
 
@@ -30,7 +31,3 @@ class Entregador(models.Model):
     telefone = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
     cpf = models.CharField(max_length=30)
-
-class PedidoEntregador(models.Model):
-    entregador = models.ForeignKey(Entregador, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
